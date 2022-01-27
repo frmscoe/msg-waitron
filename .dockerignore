@@ -1,0 +1,6 @@
+*/node_modules
+coverage
+template
+.vscode
+README.md
+src/dataExport/
