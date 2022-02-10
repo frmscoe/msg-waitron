@@ -1,5 +1,4 @@
-import { Body, Controller, Get, Param, Query, StreamableFile } from '@nestjs/common';
-import { randomInt } from 'crypto';
+import { Body, Controller, Get, Param, Query, StreamableFile } from '@nestjs/common'; 
 import { Observable } from 'rxjs';
 import { AppService } from './app.service';
 
@@ -13,7 +12,7 @@ export class AppController {
   async getRandomMessage(@Body() body: any) {
     let messageType = body.messageType
     const fs = require('fs').promises;
-    const randomNumber = randomInt(500);
+    const randomNumber = this.getRandomInt(500);
 
     let fileString = '00' + randomNumber
 
@@ -40,29 +39,31 @@ export class AppController {
     return data;
 
   }
+ getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+@Get('getSpecificMessage')
+async getSpecificMessage(@Body() body: any) {
+  let messageType = body.messageType
+  let messageID = body.messageID
 
-  @Get('getSpecificMessage')
-  async getSpecificMessage(@Body() body: any) {
-    let messageType = body.messageType
-    let messageID = body.messageID
-
-    const fs = require('fs').promises;
+  const fs = require('fs').promises;
 
 
-    const data = await
-      fs.readFile('./src/dataExport/'
-        + messageType
-        + '/'
-        + messageID
-        + messageType
-        + '.json', 'utf8', (error, data) => {
-          if (error) {
-            console.log(`ERROR: ${error}`)
-            return 'file not found '
-          }
-          return data;
-        })
-    return data
+  const data = await
+    fs.readFile('./src/dataExport/'
+      + messageType
+      + '/'
+      + messageID
+      + messageType
+      + '.json', 'utf8', (error, data) => {
+        if (error) {
+          console.log(`ERROR: ${error}`)
+          return 'file not found '
+        }
+        return data;
+      })
+  return data
 
-  }
+}
 }
