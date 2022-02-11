@@ -1,11 +1,11 @@
-FROM node:8-alpine
+FROM node:16.13.2-alpine
 
 WORKDIR /app
 
 ADD package.json /app/package.json
 RUN npm config set registry http://registry.npmjs.org
 RUN npm install 
-RUN npm build 
+RUN npm run build 
 COPY . /app  
 EXPOSE 3000 
 EXPOSE 50051
