@@ -1,0 +1,15 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: https://frmfaas.sybrin.com
+functions:
+  off-msg-waitron:
+    namespace: openfaas-fn
+    lang: dockerfile
+    handler: .
+    image: actio.azurecr.io/off-msg-waitron:latest
+    annotations:
+      com.openfaas.health.http.path: /health
+      com.openfaas.health.http.initialDelay: "45s"
+    secrets:
+      - frmpullsecret
