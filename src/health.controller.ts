@@ -8,7 +8,7 @@ const handleMonitorTransaction = (ctx: Context): Context => {
 
 const handleHealthCheck = (ctx: Context): Context => {
   const data = {
-    status: 'UP',
+    status: 'Online',
   };
   ctx.body = data;
 
