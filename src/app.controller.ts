@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 import { Body, Controller, Get, Param, Query, StreamableFile } from '@nestjs/common'; 
 import { Observable } from 'rxjs';
 import { AppService } from './app.service';
